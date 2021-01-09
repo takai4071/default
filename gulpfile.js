@@ -8,6 +8,7 @@ const cleancss = require("gulp-clean-css");
 const imagemin = require("gulp-imagemin");
 const newer = require("gulp-newer");
 const del = require("del");
+const babel = require("gulp-babel");
 
 function browsersync() {
   browserSync.init({
@@ -23,6 +24,11 @@ function browsersync() {
 
 function scripts() {
   return src(["node_modules/jquery/dist/jquery.min.js", "app/js/app.js"])
+    .pipe(
+      babel({
+        presets: ["@babel/preset-env"],
+      })
+    )
     .pipe(concat("app.min.js"))
     .pipe(uglify())
     .pipe(dest("app/js/"))
