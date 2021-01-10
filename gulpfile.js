@@ -1,6 +1,6 @@
-const { parallel, series } = require("gulp");
+const { parallel, series, watch } = require("gulp");
 
-const { browsersync } = require("./functions/browsersync");
+const { browsersync, browserSync } = require("./functions/browsersync");
 exports.browsersync = browsersync;
 
 const scripts = require("./functions/scripts");
@@ -39,6 +39,11 @@ exports.build = series(
 );
 exports.cleandist = cleandist;
 
-const startwatch = require("./functions/watch");
+function startwatch() {
+  watch("app/**/*.scss", styles);
+  watch(["app/**/*.js", "!app/**/*.min.js"], scripts);
+  watch("app/**/*.html").on("change", browserSync.reload);
+  watch("app/images/src/**/*", images);
+}
 
 exports.default = parallel(scripts, styles, browsersync, startwatch);
