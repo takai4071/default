@@ -1,6 +1,6 @@
 const { parallel, series } = require("gulp");
 
-const { browsersync, browserSync } = require("./functions/browsersync");
+const { browsersync } = require("./functions/browsersync");
 exports.browsersync = browsersync;
 
 const scripts = require("./functions/scripts");
