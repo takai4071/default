@@ -3,7 +3,7 @@ const { parallel, series, watch } = require("gulp");
 const { browsersync, browserSync } = require("./functions/browsersync");
 exports.browsersync = browsersync;
 
-const scripts = require("./functions/scripts");
+const { scripts, scripts_build } = require("./functions/scripts");
 exports.scripts = scripts;
 
 const styles = require("./functions/styles");
@@ -29,7 +29,7 @@ const { buildcopy, cleandist } = require("./functions/build");
 exports.build = series(
   cleandist,
   styles,
-  scripts,
+  scripts_build,
   images,
   cleanfonts,
   otf_to_ttf,
