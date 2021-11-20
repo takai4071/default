@@ -2,14 +2,12 @@ const { src, dest } = require("gulp");
 const scss = require("gulp-sass");
 const autoprefixer = require("gulp-autoprefixer");
 const cleancss = require("gulp-clean-css");
-const concat = require("gulp-concat");
 
-const { browserSync } = require("./browsersync");
 
-function styles() {
-  return src("app/scss/main.scss")
+function styles_build() {
+  return src("app/scss/*")
     .pipe(scss())
-    .pipe(concat("app.min.css"))
+
     .pipe(
       autoprefixer({
         overrideBrowserslist: ["last 10 versions"],
@@ -27,8 +25,7 @@ function styles() {
         // format: "beautify",
       })
     )
-    .pipe(dest("app/css/"))
-    .pipe(browserSync.stream());
+    .pipe(dest("dist/css"));
 }
 
-module.exports = styles;
+module.exports = { styles_build };

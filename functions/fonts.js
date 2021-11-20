@@ -26,15 +26,13 @@ function ttf_to_woff2() {
     .pipe(dest("app/fonts/dest/"));
 }
 
-function cleanfonts() {
-  return del("app/fonts/dest/**/*", { force: true });
+function fonts_build() {
+  return src("app/fonts/dest/**").pipe(dest("dist/fonts/dest/"));
 }
 
-const fonts_functions = {
+module.exports = {
   otf_to_ttf,
   ttf_to_woff,
   ttf_to_woff2,
-  cleanfonts,
+  fonts_build,
 };
-
-module.exports = fonts_functions;
